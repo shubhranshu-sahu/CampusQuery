@@ -1,0 +1,84 @@
+:root {
+  --bg-main: #0b0f19;
+  --bg-card: #12182b;
+  --primary: #4f6ef7;
+  --accent: #22d3ee;
+  --text-main: #e5e7eb;
+  --text-muted: #9ca3af;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-main);
+  color: var(--text-main);
+}
+
+/* Navbar */
+.glass-nav {
+  background: rgba(11, 15, 25, 0.85);
+  backdrop-filter: blur(10px);
+}
+
+/* Hero */
+.hero-section {
+  min-height: 100vh;
+  padding-top: 100px;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.hero-subtitle {
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-image {
+  max-width: 420px;
+}
+
+/* Sections */
+.section-padding {
+  padding: 90px 0;
+}
+
+.section-title {
+  font-weight: 700;
+}
+
+.section-subtitle {
+  color: var(--text-muted);
+}
+
+/* Cards */
+.feature-card,
+.step-card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: 30px;
+  height: 100%;
+}
+
+.feature-icon {
+  font-size: 2rem;
+  color: var(--accent);
+}
+
+/* Footer */
+.footer {
+  padding: 30px 0;
+  background: #060913;
+}
+
+/* Loader */
+.loader-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 15, 25, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}

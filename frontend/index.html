@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CampusQuery — AI-Powered Campus Intelligence</title>
+
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
+  <!-- Icons -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+    rel="stylesheet"
+  />
+
+  <!-- Google Font -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+</head>
+
+<body>
+
+<!-- ===================== -->
+<!-- GLOBAL LOADING OVERLAY -->
+<!-- ===================== -->
+<div id="global-loader" class="loader-overlay d-none">
+  <div class="loader-content text-center">
+    <div class="spinner-border text-info mb-3" role="status"></div>
+    <p id="loader-text">Loading...</p>
+  </div>
+</div>
+
+<!-- ===================== -->
+<!-- NAVBAR -->
+<!-- ===================== -->
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark glass-nav">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="#">
+      <i class="bi bi-cpu"></i> CampusQuery
+    </a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navMenu"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
+        <li class="nav-item">
+          <a class="nav-link" href="#features">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#how-it-works">How it Works</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-outline-info btn-sm" href="pages/login.html">
+            Login
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-info btn-sm" href="pages/register.html">
+            Get Started
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ===================== -->
+<!-- HERO SECTION -->
+<!-- ===================== -->
+<section class="hero-section d-flex align-items-center">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 fade-up">
+        <h1 class="hero-title">
+          Campus Intelligence,<br />
+          Powered by AI
+        </h1>
+        <p class="hero-subtitle mt-3">
+          CampusQuery is a campus-scoped AI platform that helps students and
+          administrators access verified information through a ChatGPT-like
+          interface — without hallucinations.
+        </p>
+
+        <div class="mt-4 d-flex gap-3 flex-wrap">
+          <a href="pages/register.html" class="btn btn-info btn-lg">
+            Get Started
+          </a>
+          <a href="#how-it-works" class="btn btn-outline-light btn-lg">
+            Learn More
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-6 text-center fade-up delay-1">
+        <img
+          src="public/assets/images/hero.svg"
+          alt="CampusQuery AI"
+          class="img-fluid hero-image"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== -->
+<!-- FEATURES -->
+<!-- ===================== -->
+<section id="features" class="section-padding">
+  <div class="container">
+    <div class="text-center mb-5 fade-up">
+      <h2 class="section-title">Why CampusQuery?</h2>
+      <p class="section-subtitle">
+        Built as a real campus system — not just another chatbot.
+      </p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4 fade-up">
+        <div class="feature-card">
+          <i class="bi bi-chat-dots feature-icon"></i>
+          <h5>ChatGPT-like AI</h5>
+          <p>
+            Natural conversations, multiple chat threads, memory retention, and
+            academic assistance — all campus-restricted.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4 fade-up delay-1">
+        <div class="feature-card">
+          <i class="bi bi-shield-check feature-icon"></i>
+          <h5>No Hallucinations</h5>
+          <p>
+            Answers are generated strictly from verified campus data using
+            production-grade RAG pipelines.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4 fade-up delay-2">
+        <div class="feature-card">
+          <i class="bi bi-diagram-3 feature-icon"></i>
+          <h5>Admin-Governed Knowledge</h5>
+          <p>
+            Admins control and curate entries while maintaining transparency and
+            avoiding duplication.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== -->
+<!-- HOW IT WORKS -->
+<!-- ===================== -->
+<section id="how-it-works" class="section-padding bg-dark-soft">
+  <div class="container">
+    <div class="text-center mb-5 fade-up">
+      <h2 class="section-title">How CampusQuery Works</h2>
+      <p class="section-subtitle">
+        A clean, industry-aligned AI architecture.
+      </p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-3 fade-up">
+        <div class="step-card">
+          <span>1</span>
+          <p>Admins add verified campus entries</p>
+        </div>
+      </div>
+
+      <div class="col-md-3 fade-up delay-1">
+        <div class="step-card">
+          <span>2</span>
+          <p>Entries are chunked and embedded</p>
+        </div>
+      </div>
+
+      <div class="col-md-3 fade-up delay-2">
+        <div class="step-card">
+          <span>3</span>
+          <p>AI retrieves relevant context</p>
+        </div>
+      </div>
+
+      <div class="col-md-3 fade-up delay-3">
+        <div class="step-card">
+          <span>4</span>
+          <p>Students get accurate answers</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== -->
+<!-- FOOTER -->
+<!-- ===================== -->
+<footer class="footer text-center">
+  <div class="container">
+    <p class="mb-1">
+      © 2026 CampusQuery — Built for Academic Institutions
+    </p>
+    <small class="text-muted">
+      Designed & Developed by Shubhranshu Sahu
+    </small>
+  </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom JS -->
+<script src="js/index.js"></script>
+
+</body>
+</html>
