@@ -11,6 +11,8 @@
 // =====================
 // ROLE-BASED UI
 // =====================
+user = {role: "admin"}; // TEMP
+
 if (user?.role === "admin") {
   document.getElementById("admin-entry-link").classList.remove("d-none");
 }

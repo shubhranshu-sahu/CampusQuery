@@ -3,8 +3,10 @@
   --bg-card: #12182b;
   --primary: #4f6ef7;
   --accent: #22d3ee;
-  --text-main: #e5e7eb;
-  --text-muted: #9ca3af;
+
+  --text-main: #e5e7eb;     /* main readable text */
+  --text-muted: #c1cbb6;   /* FIXED: brighter muted text */
+  --text-placeholder: #8b93a7; /* NEW: placeholder text */
 }
 
 body {
@@ -201,3 +203,48 @@ body {
     left: 0;
   }
 }
+
+
+
+/* ===================== */
+/* PLACEHOLDER VISIBILITY */
+/* ===================== */
+
+::placeholder {
+  color: var(--text-placeholder) !important;
+  opacity: 1; /* Firefox fix */
+}
+
+::-webkit-input-placeholder {
+  color: var(--text-placeholder);
+}
+
+:-ms-input-placeholder {
+  color: var(--text-placeholder);
+}
+
+
+.form-label {
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.text-muted {
+  color: var(--text-muted) !important;
+}
+
+.form-control,
+.form-select {
+  background: #0f1525;
+  border: 1px solid #2a324a;
+  color: var(--text-main);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.3);
+}
+
+
+/* -----------------  */
