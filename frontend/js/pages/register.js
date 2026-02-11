@@ -13,11 +13,11 @@ form.addEventListener("submit", async (e) => {
     confirm_password: document.getElementById("confirm_password").value,
     gender: document.getElementById("gender").value,
     age: document.getElementById("age").value,
-    role: document.getElementById("role").value
+    role: document.getElementById("role").value,
   };
 
   // Basic validation
-  if (Object.values(data).some(v => !v)) {
+  if (Object.values(data).some((v) => !v)) {
     showError("Please fill in all fields.");
     return;
   }
@@ -32,22 +32,37 @@ form.addEventListener("submit", async (e) => {
     return;
   }
 
-  try {
-    showLoader("Creating your account...");
+try {
+  showLoader("Creating your account...");
 
-    // TEMP: simulate API delay
-    await new Promise(res => setTimeout(res, 1500));
+  const res = await fetch(`${API_BASE}/auth/register`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      first_name: data.first_name,
+      last_name: data.last_name,
+      email: data.email,
+      password: data.password,
+      gender: data.gender,
+      age: parseInt(data.age),
+      role: data.role
+    })
+  });
 
-    // TODO later:
-    // POST /auth/register
+  const result = await res.json();
 
-    window.location.href = "login.html";
-
-  } catch (err) {
-    showError("Registration failed. Please try again.");
-  } finally {
-    hideLoader();
+  if (!res.ok) {
+    throw new Error(result.error || "Registration failed");
   }
+
+  window.location.href = "login.html";
+
+} catch (err) {
+  showError(err.message);
+}
+
 });
 
 function showError(message) {

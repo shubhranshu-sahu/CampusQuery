@@ -1,18 +1,16 @@
 // =====================
-// AUTH CHECK (TEMP)
+// AUTH CHECK 
 // =====================
-// const user = JSON.parse(localStorage.getItem("campusquery_user"));
+const token = localStorage.getItem("campusquery_token");
+const user = JSON.parse(localStorage.getItem("campusquery_user"));
 
-// if (!user) {
-//   // Not logged in
-//   window.location.replace("login.html");
-// }
+if (!token || !user) {
+  window.location.replace("login.html");
+}
 
 // =====================
 // ROLE-BASED UI
 // =====================
-user = {role: "admin"}; // TEMP
-
 if (user?.role === "admin") {
   document.getElementById("admin-entry-link").classList.remove("d-none");
 }

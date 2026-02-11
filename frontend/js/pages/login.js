@@ -16,17 +16,29 @@ form.addEventListener("submit", async (e) => {
   try {
     showLoader("Signing you in...");
 
-    // TEMP: simulate API delay
-    await new Promise(res => setTimeout(res, 1200));
+    const res = await fetch(`${API_BASE}/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email, password })
+    });
 
-    // TODO (later):
-    // const res = await fetch(`${API_BASE}/auth/login`, {...})
+    const data = await res.json();
 
-    // TEMP SUCCESS
-    window.location.href = "dashboard.html";
+    if (!res.ok) {
+      throw new Error(data.error || "Login failed");
+    }
+
+    // Store token & user
+    localStorage.setItem("campusquery_token", data.token);
+    localStorage.setItem("campusquery_user", JSON.stringify(data.user));
+
+    // Redirect
+    window.location.replace("dashboard.html");
 
   } catch (err) {
-    showError("Invalid email or password.");
+    showError(err.message);
   } finally {
     hideLoader();
   }
@@ -37,7 +49,6 @@ function showError(message) {
   errorBox.classList.remove("d-none");
 }
 
-// Loader helpers (same pattern as index)
 function showLoader(text) {
   document.getElementById("loader-text").innerText = text;
   document.getElementById("global-loader").classList.remove("d-none");
