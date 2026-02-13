@@ -30,5 +30,8 @@ def create_app():
     from .routes.user_routes import user_bp
     app.register_blueprint(user_bp, url_prefix="/api/user")
 
+    from .routes.chat_routes import chat_bp
+    app.register_blueprint(chat_bp, url_prefix="/api/chat")
+
 
     return app
