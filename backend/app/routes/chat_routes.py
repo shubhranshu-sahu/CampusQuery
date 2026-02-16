@@ -196,3 +196,82 @@ def send_message():
     }), 200
 
 
+### Rename Thread ----------------------------------------------------------------------
+
+@chat_bp.route("/thread/<thread_id>", methods=["PATCH"])
+@token_required
+def rename_thread(thread_id):
+    user = g.current_user
+    data = request.get_json()
+
+    new_title = data.get("title")
+
+    if not new_title or not new_title.strip():
+        return jsonify({"error": "Title cannot be empty"}), 400
+
+    try:
+        thread_object_id = ObjectId(thread_id)
+    except:
+        return jsonify({"error": "Invalid thread ID"}), 400
+
+    thread = mongo_db.chat_threads.find_one({
+        "_id": thread_object_id,
+        "is_deleted": False
+    })
+
+    if not thread:
+        return jsonify({"error": "Thread not found"}), 404
+
+    if thread["user_id"] != user.id:
+        return jsonify({"error": "Unauthorized access"}), 403
+
+    now = datetime.utcnow()
+
+    mongo_db.chat_threads.update_one(
+        {"_id": thread_object_id},
+        {
+            "$set": {
+                "title": new_title.strip(),
+                "updated_at": now
+            }
+        }
+    )
+
+    return jsonify({"message": "Thread renamed successfully"}), 200
+
+
+
+### Delete Thread ---------------------------------------------------------------------- for now soft delete only
+
+@chat_bp.route("/thread/<thread_id>", methods=["DELETE"])
+@token_required
+def delete_thread(thread_id):
+    user = g.current_user
+
+    try:
+        thread_object_id = ObjectId(thread_id)
+    except:
+        return jsonify({"error": "Invalid thread ID"}), 400
+
+    thread = mongo_db.chat_threads.find_one({
+        "_id": thread_object_id,
+        "is_deleted": False
+    })
+
+    if not thread:
+        return jsonify({"error": "Thread not found"}), 404
+
+    if thread["user_id"] != user.id:
+        return jsonify({"error": "Unauthorized access"}), 403
+
+    mongo_db.chat_threads.update_one(
+        {"_id": thread_object_id},
+        {
+            "$set": {
+                "is_deleted": True,
+                "updated_at": datetime.utcnow()
+            }
+        }
+    )
+
+    return jsonify({"message": "Thread deleted successfully"}), 200

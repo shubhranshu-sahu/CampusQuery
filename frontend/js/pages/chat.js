@@ -19,6 +19,71 @@ const chatContainer = document.getElementById("chat-container");
 document.getElementById("new-chat-btn").addEventListener("click", createNewThread);
 document.getElementById("chat-form").addEventListener("submit", handleMessage);
 
+document.getElementById("rename-thread").addEventListener("click", renameThread);
+document.getElementById("delete-thread").addEventListener("click", deleteThread);
+
+
+// rename thread ---------------------------------
+async function renameThread() {
+  if (!currentThreadId) return;
+
+  const newTitle = prompt("Enter new thread name:");
+
+  if (!newTitle || !newTitle.trim()) return;
+
+  try {
+    const res = await fetch(`${API_BASE}/chat/thread/${currentThreadId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        title: newTitle.trim()
+      })
+    });
+
+    if (!res.ok) throw new Error("Rename failed");
+
+    threadName.innerText = newTitle.trim();
+    await loadThreads();
+
+  } catch (err) {
+    alert("Failed to rename thread");
+  }
+}
+
+
+// delete thread ------------------------------------------------------
+async function deleteThread() {
+  if (!currentThreadId) return;
+
+  const confirmDelete = confirm("Are you sure you want to delete this thread?");
+
+  if (!confirmDelete) return;
+
+  try {
+    const res = await fetch(`${API_BASE}/chat/thread/${currentThreadId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    if (!res.ok) throw new Error("Delete failed");
+
+    currentThreadId = null;
+    chatMessages.innerHTML = "";
+    showWelcome();
+    await loadThreads();
+
+  } catch (err) {
+    alert("Failed to delete thread");
+  }
+}
+//-----------------------------------------------------------------------------------
+
+
 function goBack() {
   window.location.href = "dashboard.html";
 }
@@ -26,11 +91,18 @@ function goBack() {
 function showWelcome() {
   welcomeScreen.classList.remove("d-none");
   chatContainer.classList.add("d-none");
+
+  document.getElementById("rename-thread").style.display = "none";
+  document.getElementById("delete-thread").style.display = "none";
 }
 
 function showChat() {
   welcomeScreen.classList.add("d-none");
   chatContainer.classList.remove("d-none");
+
+  document.getElementById("rename-thread").style.display = "inline-block";
+  document.getElementById("delete-thread").style.display = "inline-block";
+
 }
 
 async function loadThreads() {
