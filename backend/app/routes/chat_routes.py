@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, g
+from flask import Blueprint, jsonify, g , request
 from datetime import datetime
 from bson.objectid import ObjectId
 
@@ -65,3 +65,134 @@ def get_threads():
         })
 
     return jsonify({"threads": threads}), 200
+
+
+from bson.objectid import ObjectId
+
+@chat_bp.route("/messages/<thread_id>", methods=["GET"])
+@token_required
+def get_thread_messages(thread_id):
+    user = g.current_user
+
+    # Validate ObjectId format
+    try:
+        thread_object_id = ObjectId(thread_id)
+    except:
+        return jsonify({"error": "Invalid thread ID"}), 400
+
+    # Fetch thread
+    thread = mongo_db.chat_threads.find_one({
+        "_id": thread_object_id,
+        "is_deleted": False
+    })
+
+    if not thread:
+        return jsonify({"error": "Thread not found"}), 404
+
+    # Security check
+    if thread["user_id"] != user.id:
+        return jsonify({"error": "Unauthorized access"}), 403
+
+    # Fetch messages
+    messages_cursor = mongo_db.chat_messages.find(
+        {"thread_id": thread_object_id}
+    ).sort("created_at", 1)
+
+    messages = []
+
+    for msg in messages_cursor:
+        messages.append({
+            "role": msg["role"],
+            "content": msg["content"],
+            "created_at": msg["created_at"]
+        })
+
+    return jsonify({
+        "thread": {
+            "id": thread_id,
+            "title": thread["title"]
+        },
+        "messages": messages
+    }), 200
+
+
+
+
+### Sending Messages ----------------------------------------------------------------------
+
+@chat_bp.route("/message", methods=["POST"])
+@token_required
+def send_message():
+    user = g.current_user
+    data = request.get_json()
+
+    thread_id = data.get("thread_id")
+    user_message = data.get("message")
+
+    if not thread_id or not user_message:
+        return jsonify({"error": "Thread ID and message required"}), 400
+
+    # Validate ObjectId
+    try:
+        thread_object_id = ObjectId(thread_id)
+    except:
+        return jsonify({"error": "Invalid thread ID"}), 400
+
+    # Fetch thread
+    thread = mongo_db.chat_threads.find_one({
+        "_id": thread_object_id,
+        "is_deleted": False
+    })
+
+    if not thread:
+        return jsonify({"error": "Thread not found"}), 404
+
+    # Security check
+    if thread["user_id"] != user.id:
+        return jsonify({"error": "Unauthorized access"}), 403
+
+    now = datetime.utcnow()
+
+    # 1️⃣ Save user message
+    mongo_db.chat_messages.insert_one({
+        "thread_id": thread_object_id,
+        "role": "user",
+        "content": user_message,
+        "token_count": None,
+        "metadata": {},
+        "created_at": now
+    })
+
+    # 2️⃣ Generate dummy assistant response
+    assistant_response = "This is a placeholder AI response."
+
+    assistant_now = datetime.utcnow()
+
+    # 3️⃣ Save assistant message
+    mongo_db.chat_messages.insert_one({
+        "thread_id": thread_object_id,
+        "role": "assistant",
+        "content": assistant_response,
+        "token_count": None,
+        "metadata": {},
+        "created_at": assistant_now
+    })
+
+    # 4️⃣ Update thread metadata
+    mongo_db.chat_threads.update_one(
+        {"_id": thread_object_id},
+        {
+            "$set": {"updated_at": assistant_now},
+            "$inc": {"message_count": 2}
+        }
+    )
+
+    return jsonify({
+        "assistant": {
+            "role": "assistant",
+            "content": assistant_response,
+            "created_at": assistant_now
+        }
+    }), 200
+
+
