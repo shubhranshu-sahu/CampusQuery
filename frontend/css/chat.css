@@ -101,3 +101,20 @@
   text-align: center;
   color: var(--text-muted);
 }
+
+
+/* Chat styling Markdowns ? */
+.message h1, 
+.message h2, 
+.message h3 {
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+.message ul {
+  padding-left: 20px;
+}
+
+.message strong {
+  font-weight: 600;
+}

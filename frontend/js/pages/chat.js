@@ -221,7 +221,7 @@ async function handleMessage(e) {
 function addMessage(role, content) {
   const msgDiv = document.createElement("div");
   msgDiv.className = `message ${role}`;
-  msgDiv.innerText = content;
+  msgDiv.innerHTML = marked.parse(content);
 
   chatMessages.appendChild(msgDiv);
   chatMessages.scrollTop = chatMessages.scrollHeight;

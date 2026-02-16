@@ -5,6 +5,9 @@ from bson.objectid import ObjectId
 from app.extensions import mongo_db
 from app.utils.decorators import token_required
 
+from app.services.chat_service import generate_ai_response
+
+
 chat_bp = Blueprint("chat", __name__)
 
 
@@ -153,7 +156,7 @@ def send_message():
 
     now = datetime.utcnow()
 
-    # 1️⃣ Save user message
+    # 1️ Save user message
     mongo_db.chat_messages.insert_one({
         "thread_id": thread_object_id,
         "role": "user",
@@ -163,12 +166,14 @@ def send_message():
         "created_at": now
     })
 
-    # 2️⃣ Generate dummy assistant response
-    assistant_response = "This is a placeholder AI response."
+    
+    # 2 Generate dummy assistant response
+    # assistant_response = "This is a placeholder AI response."
+    assistant_response = generate_ai_response(thread_id, user_message)
 
     assistant_now = datetime.utcnow()
 
-    # 3️⃣ Save assistant message
+    # 3️ Save assistant message
     mongo_db.chat_messages.insert_one({
         "thread_id": thread_object_id,
         "role": "assistant",
@@ -178,7 +183,7 @@ def send_message():
         "created_at": assistant_now
     })
 
-    # 4️⃣ Update thread metadata
+    # 4️ Update thread metadata
     mongo_db.chat_threads.update_one(
         {"_id": thread_object_id},
         {
