@@ -9,7 +9,14 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
 
-    CORS(app)
+    # CORS(app)
+    CORS(
+    app,
+    origins=[
+        "https://svvv-campus-query.vercel.app"
+    ],
+    supports_credentials=True
+)
 
     # Initialize SQLAlchemy
     db.init_app(app)
