@@ -40,5 +40,18 @@ def create_app():
     from .routes.chat_routes import chat_bp
     app.register_blueprint(chat_bp, url_prefix="/api/chat")
 
+    @app.route("/ping")
+    def ping():
+        # Touch MySQL
+        from app.extensions import db
+        db.session.execute("SELECT 1")
+    
+        # Touch Mongo
+        from app.extensions import mongo_db
+        mongo_db.command("ping")
+    
+        return {"status": "alive"}, 200
+
+
 
     return app
