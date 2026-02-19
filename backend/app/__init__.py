@@ -5,6 +5,7 @@ from .extensions import db, migrate, init_mongo
 
 
 
+
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
@@ -44,7 +45,9 @@ def create_app():
     def ping():
         # Touch MySQL
         from app.extensions import db
-        db.session.execute("SELECT 1")
+        
+        db.session.query(User.id).limit(1).all()
+
     
         # Touch Mongo
         from app.extensions import mongo_db
