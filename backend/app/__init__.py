@@ -3,6 +3,7 @@ from flask_cors import CORS
 from .config import Config
 from .extensions import db, migrate, init_mongo
 
+from app.models.user import User
 
 
 
