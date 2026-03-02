@@ -9,6 +9,8 @@ class Config:
 
     ENV = os.getenv("ENV", "development")
 
+    GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+
     # Database selection logic
     if ENV == "production":
         SQLALCHEMY_DATABASE_URI = os.getenv("PROD_MYSQL_URL")

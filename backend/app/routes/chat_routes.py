@@ -122,7 +122,6 @@ def get_thread_messages(thread_id):
 
 
 ### Sending Messages ----------------------------------------------------------------------
-
 @chat_bp.route("/message", methods=["POST"])
 @token_required
 def send_message():
@@ -140,7 +139,6 @@ def send_message():
         thread_object_id = ObjectId(thread_id)
     except:
         return jsonify({"error": "Invalid thread ID"}), 400
-
     # Fetch thread
     thread = mongo_db.chat_threads.find_one({
         "_id": thread_object_id,
@@ -149,54 +147,18 @@ def send_message():
 
     if not thread:
         return jsonify({"error": "Thread not found"}), 404
-
+    
     # Security check
     if thread["user_id"] != user.id:
         return jsonify({"error": "Unauthorized access"}), 403
 
-    now = datetime.utcnow()
-
-    # 1️ Save user message
-    mongo_db.chat_messages.insert_one({
-        "thread_id": thread_object_id,
-        "role": "user",
-        "content": user_message,
-        "token_count": None,
-        "metadata": {},
-        "created_at": now
-    })
-
-    
-    # 2 Generate dummy assistant response
-    # assistant_response = "This is a placeholder AI response."
+    # Delegate full logic to service layer
     assistant_response = generate_ai_response(thread_id, user_message)
-
-    assistant_now = datetime.utcnow()
-
-    # 3️ Save assistant message
-    mongo_db.chat_messages.insert_one({
-        "thread_id": thread_object_id,
-        "role": "assistant",
-        "content": assistant_response,
-        "token_count": None,
-        "metadata": {},
-        "created_at": assistant_now
-    })
-
-    # 4️ Update thread metadata
-    mongo_db.chat_threads.update_one(
-        {"_id": thread_object_id},
-        {
-            "$set": {"updated_at": assistant_now},
-            "$inc": {"message_count": 2}
-        }
-    )
 
     return jsonify({
         "assistant": {
             "role": "assistant",
-            "content": assistant_response,
-            "created_at": assistant_now
+            "content": assistant_response
         }
     }), 200
 

@@ -15,7 +15,8 @@ def create_app():
     CORS(
     app,
     origins=[
-        "https://svvv-campus-query.vercel.app"
+        "https://svvv-campus-query.vercel.app",
+        "http://127.0.0.1:5500"
     ],
     supports_credentials=True
 )
