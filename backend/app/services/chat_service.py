@@ -49,7 +49,8 @@ def generate_ai_response(thread_id, user_message):
     # Invoke graph
     result = chat_graph.invoke({"messages": lc_messages})
 
-    ai_message = result["messages"][-1].content
+    # ai_message = result["messages"][-1].content
+    ai_message = result["final_answer"]
 
     # Save AI response
     mongo_db.chat_messages.insert_one({
