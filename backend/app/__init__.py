@@ -43,6 +43,9 @@ def create_app():
     from .routes.chat_routes import chat_bp
     app.register_blueprint(chat_bp, url_prefix="/api/chat")
 
+    from app.routes.entry_routes import entry_bp
+    app.register_blueprint(entry_bp, url_prefix="/api/entries")
+
     @app.route("/ping")
     def ping():
         # Touch MySQL
