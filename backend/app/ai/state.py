@@ -1,11 +1,8 @@
+# backend/app/ai/state.py
+
 from typing import TypedDict, List
 from langchain_core.messages import BaseMessage
 
-
-# class ChatState(TypedDict):
-#     messages: List[BaseMessage]
-
-# backend/app/ai/state.py
 
 from typing import TypedDict, List
 from langchain_core.messages import BaseMessage
@@ -27,8 +24,18 @@ class ChatState(TypedDict):
     needs_clarification: bool
     clarification_question: str
 
+    use_rag: bool
+
     # Rewritten query (for better reasoning / future RAG)
     rewritten_query: str
+    
+    # Retrieved context from vector DB
+    retrieved_context: str
 
     # Final response
     final_answer: str
+
+
+
+
+
