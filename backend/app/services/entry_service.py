@@ -4,6 +4,13 @@ from datetime import datetime
 from bson.objectid import ObjectId
 from app.extensions import mongo_db
 
+from app.services.embedding_service import add_entry_to_vector_db
+from app.services.embedding_service import update_entry_in_vector_db
+from app.services.embedding_service import delete_entry_from_vector_db
+
+
+# from backend.app.models import entry
+
 
 def create_entry(user, data):
     """
@@ -33,6 +40,9 @@ def create_entry(user, data):
     result = mongo_db.entries.insert_one(entry)
 
     entry["_id"] = str(result.inserted_id)
+
+    # Add to vector DB
+    add_entry_to_vector_db(entry)
 
     return {
         "message": "Entry created successfully",
@@ -106,6 +116,10 @@ def update_entry(user, entry_id, data):
         {"$set": update_data}
     )
 
+    # Update vector DB embedding
+    updated_entry = mongo_db.entries.find_one({"_id": entry_object_id})
+    update_entry_in_vector_db(updated_entry)
+
     return {"message": "Entry updated successfully"}, 200
 
 
@@ -139,5 +153,8 @@ def delete_entry(user, entry_id):
             }
         }
     )
+
+    delete_entry_from_vector_db(entry_id)
+
 
     return {"message": "Entry deleted successfully"}, 200
