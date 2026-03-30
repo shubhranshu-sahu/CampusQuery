@@ -64,26 +64,27 @@ function renderEntries() {
         div.className = "col-md-4";
 
         div.innerHTML = `
-        <div class="card h-100 shadow-sm">
-            <div class="card-body">
-                <h5>${entry.title}</h5>
-                <p>${entry.description}</p>
+        <div class="card shadow-sm" style="cursor: pointer; height: 280px; display: flex; flex-direction: column;" onclick="openViewModal('${entry.id}')">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title text-truncate title-text">${entry.title}</h5>
+                <p class="card-text text-muted flex-grow-1" style="display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; white-space: normal;">
+                    ${entry.description}
+                </p>
 
-                <small>Tags: ${entry.tags.join(", ")}</small><br>
-                <small>Author: ${entry.author_name}</small>
+                <div class="mt-auto">
+                    <small class="text-info d-block text-truncate">Tags: ${entry.tags.join(", ")}</small>
+                    <small class="text-secondary d-block text-truncate">Author: ${entry.author_name}</small>
 
-                <div class="mt-3 d-flex justify-content-end gap-2">
-                    ${isOwner ? `
-                        <button class="btn btn-sm btn-warning"
-                            onclick="openEditModal('${entry.id}')">
-                            Edit
-                        </button>
-
-                        <button class="btn btn-sm btn-danger"
-                            onclick="deleteEntry('${entry.id}')">
-                            Delete
-                        </button>
-                    ` : ""}
+                    <div class="mt-3 d-flex justify-content-end gap-2" onclick="event.stopPropagation()">
+                        ${isOwner ? `
+                            <button class="btn btn-sm btn-warning" onclick="openEditModal('${entry.id}')">
+                                <i class="bi bi-pencil"></i> Edit
+                            </button>
+                            <button class="btn btn-sm btn-danger" onclick="deleteEntry('${entry.id}')">
+                                <i class="bi bi-trash"></i> Delete
+                            </button>
+                        ` : ""}
+                    </div>
                 </div>
             </div>
         </div>
@@ -93,6 +94,37 @@ function renderEntries() {
     });
 }
 
+
+// ---------------- VIEW ----------------
+
+function openViewModal(id) {
+    const entry = entries.find(e => e.id === id);
+    if (!entry) return;
+
+    const isOwner = entry.author_name === user.email;
+
+    document.getElementById("viewModalTitle").innerText = entry.title;
+    document.getElementById("viewModalAuthor").innerText = "Author: " + entry.author_name;
+    document.getElementById("viewModalDescription").innerText = entry.description;
+    document.getElementById("viewModalTags").innerText = "Tags: " + entry.tags.join(", ");
+
+    const actionsContainer = document.getElementById("viewModalActions");
+    if (isOwner) {
+        actionsContainer.innerHTML = `
+            <button class="btn btn-sm btn-warning" onclick="openEditModal('${entry.id}'); bootstrap.Modal.getInstance(document.getElementById('viewEntryModal')).hide();">
+                <i class="bi bi-pencil"></i> Edit
+            </button>
+            <button class="btn btn-sm btn-danger" onclick="deleteEntry('${entry.id}'); bootstrap.Modal.getInstance(document.getElementById('viewEntryModal')).hide();">
+                <i class="bi bi-trash"></i> Delete
+            </button>
+        `;
+    } else {
+        actionsContainer.innerHTML = "";
+    }
+
+    const viewModal = new bootstrap.Modal(document.getElementById("viewEntryModal"));
+    viewModal.show();
+}
 
 // ---------------- CREATE ----------------
 
