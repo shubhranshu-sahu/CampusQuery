@@ -33,6 +33,7 @@ form.addEventListener("submit", async (e) => {
     // Store token & user
     localStorage.setItem("campusquery_token", data.token);
     localStorage.setItem("campusquery_user", JSON.stringify(data.user));
+    localStorage.setItem("user_email", data.user.email);
 
     // Redirect
     window.location.replace("dashboard.html");

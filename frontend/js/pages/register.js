@@ -61,7 +61,9 @@ try {
 
 } catch (err) {
   showError(err.message);
-}
+}finally {
+    hideLoader();
+  }
 
 });
 
