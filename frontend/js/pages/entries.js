@@ -1,4 +1,3 @@
-const API_BASE = "http://127.0.0.1:5000/api";
 
 const token = localStorage.getItem("campusquery_token");
 const user = JSON.parse(localStorage.getItem("campusquery_user"));
