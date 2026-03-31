@@ -1,5 +1,7 @@
 # backend/app/services/embedding_service.py
 
+import uuid
+
 from app.ai.vector_store import vector_store
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
@@ -70,8 +72,9 @@ def add_entry_to_vector_db(entry):
             "tags": ",".join([str(t) for t in entry.get("tags", [])])
         })
 
-        ids.append(f"{entry['_id']}_{i}")  # UNIQUE per chunk
-
+        # ids.append(f"{entry['_id']}_{i}")  # UNIQUE per chunk 
+        ids.append(str(uuid.uuid4()))  # qdrant requires unique ids which are either integers or UUIDs , so we generate a new UUID for each chunk
+        
     vector_store.add_texts(
         texts=texts,
         metadatas=metadatas,

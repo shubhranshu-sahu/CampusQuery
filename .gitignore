@@ -57,6 +57,7 @@ Thumbs.db
 # =========================
 chroma/
 vector_store/
+chroma_db/
 
 # =========================
 # Coverage / Testing
