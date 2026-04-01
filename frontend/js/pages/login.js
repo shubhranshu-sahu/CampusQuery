@@ -13,6 +13,7 @@ form.addEventListener("submit", async (e) => {
     return;
   }
 
+  let isNavigating = false;
   try {
     showLoader("Signing you in...");
 
@@ -36,12 +37,13 @@ form.addEventListener("submit", async (e) => {
     localStorage.setItem("user_email", data.user.email);
 
     // Redirect
+    isNavigating = true;
     window.location.replace("dashboard.html");
 
   } catch (err) {
     showError(err.message);
   } finally {
-    hideLoader();
+    if (!isNavigating) hideLoader();
   }
 });
 
