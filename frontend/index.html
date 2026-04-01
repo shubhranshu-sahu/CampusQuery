@@ -25,14 +25,13 @@
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/index-animations.css" />
   <link rel="stylesheet" href="css/animations.css" />
 </head>
 
 <body>
 
-<!-- ===================== -->
 <!-- GLOBAL LOADING OVERLAY -->
-<!-- ===================== -->
 <div id="global-loader" class="loader-overlay d-none">
   <div class="loader-content text-center">
     <div class="spinner-border text-info mb-3" role="status"></div>
@@ -40,39 +39,40 @@
   </div>
 </div>
 
-<!-- ===================== -->
 <!-- NAVBAR -->
-<!-- ===================== -->
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark glass-nav">
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark glass-nav" id="main-nav">
   <div class="container">
-    <a class="navbar-brand fw-bold" href="#">
-      <i class="bi bi-cpu"></i> CampusQuery
+    <a class="navbar-brand fw-bold gs-nav-item" href="#">
+      <i class="bi bi-cpu text-info"></i> CampusQuery
     </a>
 
     <button
-      class="navbar-toggler"
+      class="navbar-toggler border-0"
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#navMenu"
     >
-      <span class="navbar-toggler-icon"></span>
+      <i class="bi bi-list fs-2 text-white"></i>
     </button>
 
     <div class="collapse navbar-collapse" id="navMenu">
       <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
-        <li class="nav-item">
-          <a class="nav-link" href="#features">Features</a>
+        <li class="nav-item gs-nav-item">
+          <a class="nav-link text-white-50 hover-white" href="#features">Features</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#how-it-works">How it Works</a>
+        <li class="nav-item gs-nav-item">
+          <a class="nav-link text-white-50 hover-white" href="#architecture">Architecture</a>
         </li>
-        <li class="nav-item">
-          <a class="btn btn-outline-info btn-sm" href="pages/login.html">
+        <li class="nav-item gs-nav-item">
+          <a class="nav-link text-white-50 hover-white" href="#workflow">AI Flow</a>
+        </li>
+        <li class="nav-item gs-nav-item ms-lg-2 mt-3 mt-lg-0">
+          <a class="btn btn-outline-info btn-sm w-100 rounded-pill px-4" href="pages/login.html">
             Login
           </a>
         </li>
-        <li class="nav-item">
-          <a class="btn btn-info btn-sm" href="pages/register.html">
+        <li class="nav-item gs-nav-item mt-2 mt-lg-0">
+          <a class="btn btn-info btn-sm w-100 rounded-pill px-4" href="pages/register.html">
             Get Started
           </a>
         </li>
@@ -81,86 +81,108 @@
   </div>
 </nav>
 
-<!-- ===================== -->
 <!-- HERO SECTION -->
-<!-- ===================== -->
-<section class="hero-section d-flex align-items-center">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-lg-6 fade-up">
-        <h1 class="hero-title">
+<section class="hero-section d-flex align-items-center position-relative overflow-hidden">
+  <!-- Glowing Abstract Background Elements -->
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+  <div class="glow-orb orb-3"></div>
+  
+  <div class="container position-relative z-1 pt-5 pt-lg-0">
+    <div class="row align-items-center min-vh-100 pb-5">
+      <div class="col-lg-7 gs-hero-content text-center text-lg-start">
+        <div class="badge px-3 py-2 rounded-pill bg-info bg-opacity-10 text-info border border-info border-opacity-25 mb-4 gs-hero-item d-inline-block">
+          <i class="bi bi-stars"></i> Production-Grade Campus AI
+        </div>
+        <h1 class="hero-title gs-hero-item display-3 fw-bolder mb-3">
           Campus Intelligence,<br />
-          Powered by AI
+          <span class="text-gradient">Powered by AI.</span>
         </h1>
-        <p class="hero-subtitle mt-3">
-          CampusQuery is a campus-scoped AI platform that helps students and
-          administrators access verified information through a ChatGPT-like
-          interface — without hallucinations.
+        <p class="hero-subtitle gs-hero-item fs-5 text-muted mx-auto mx-lg-0 mb-5 max-w-lg">
+          CampusQuery is a secure, campus-scoped knowledge platform. Get ChatGPT-like academic assistance instantly using verified institutional data—with zero hallucinations.
         </p>
 
-        <div class="mt-4 d-flex gap-3 flex-wrap">
-          <a href="pages/register.html" class="btn btn-info btn-lg">
-            Get Started
+        <div class="d-flex flex-column flex-sm-row gap-3 gs-hero-item justify-content-center justify-content-lg-start">
+          <a href="pages/register.html" class="btn btn-info btn-lg px-4 py-3 fw-semibold rounded-pill hover-lift">
+            Enter Dashboard <i class="bi bi-arrow-right ms-2"></i>
           </a>
-          <a href="#how-it-works" class="btn btn-outline-light btn-lg">
-            Learn More
+          <a href="#workflow" class="btn btn-outline-light btn-lg px-4 py-3 fw-semibold rounded-pill glass-btn hover-lift">
+            Explore Details
           </a>
         </div>
       </div>
 
-      <div class="col-lg-6 text-center fade-up delay-1">
-        <img
-          src="public/assets/images/campus.jpg"
-          alt="CampusQuery AI"
-          class="img-fluid hero-image"
-        />
+      <div class="col-lg-5 text-center mt-5 mt-lg-0 gs-hero-visual d-none d-lg-block">
+        <div class="abstract-visual position-relative mx-auto">
+          <div class="cyber-circle">
+            <div class="inner-circle d-flex align-items-center justify-content-center">
+              <i class="bi bi-cpu-fill text-info fs-1"></i>
+            </div>
+            <div class="orbiting-dot dot-1 bg-info"></div>
+            <div class="orbiting-dot dot-2 bg-primary"></div>
+            <div class="orbiting-dot dot-3 bg-white"></div>
+          </div>
+          <div class="floating-badge badge-1 glass-panel px-3 py-2 rounded-pill position-absolute">
+            <i class="bi bi-check-circle-fill text-success fs-6 me-1"></i> <span class="small fw-semibold">RAG Active</span>
+          </div>
+          <div class="floating-badge badge-2 glass-panel px-3 py-2 rounded-pill position-absolute">
+            <i class="bi bi-database-fill text-info fs-6 me-1"></i> <span class="small fw-semibold">Vector Sync</span>
+          </div>
+        </div>
       </div>
+    </div>
+  </div>
+  
+  <div class="scroll-indicator position-absolute bottom-0 start-50 translate-middle-x mb-4 opacity-50 gs-scroll-indicator d-none d-md-block">
+    <div class="mouse-icon border border-2 border-white rounded-pill px-2 py-3">
+      <div class="wheel bg-white rounded-circle"></div>
     </div>
   </div>
 </section>
 
-<!-- ===================== -->
-<!-- FEATURES -->
-<!-- ===================== -->
-<section id="features" class="section-padding">
+<!-- FEATURES SECTION -->
+<section id="features" class="section-padding position-relative z-1 border-top border-dark border-opacity-50">
   <div class="container">
-    <div class="text-center mb-5 fade-up">
-      <h2 class="section-title">Why CampusQuery?</h2>
-      <p class="section-subtitle">
-        Built as a real campus system — not just another chatbot.
+    <div class="text-center mb-5 pb-3">
+      <h2 class="section-title text-gradient d-inline-block gs-feature-title">Why CampusQuery?</h2>
+      <p class="section-subtitle mt-2 fs-5 gs-feature-subtitle">
+        Engineered as real campus infrastructure—not just a wrapper.
       </p>
     </div>
 
     <div class="row g-4">
-      <div class="col-md-4 fade-up">
-        <div class="feature-card">
-          <i class="bi bi-chat-dots feature-icon"></i>
-          <h5>ChatGPT-like AI</h5>
-          <p>
-            Natural conversations, multiple chat threads, memory retention, and
-            academic assistance — all campus-restricted.
+      <div class="col-md-4">
+        <div class="feature-card glass-panel h-100 gs-feature-card text-center text-md-start">
+          <div class="icon-box icon-box-primary mb-4 d-inline-flex align-items-center justify-content-center rounded-circle">
+            <i class="bi bi-chat-quote-fill fs-3 text-primary"></i>
+          </div>
+          <h4 class="fw-bold mb-3 text-white">Context-Aware AI</h4>
+          <p class="text-muted mb-0">
+            Natural conversations, multiple threads, memory retention, and intelligent query rewriting for seamless academic assistance.
           </p>
         </div>
       </div>
 
-      <div class="col-md-4 fade-up delay-1">
-        <div class="feature-card">
-          <i class="bi bi-shield-check feature-icon"></i>
-          <h5>No Hallucinations</h5>
-          <p>
-            Answers are generated strictly from verified campus data using
-            production-grade RAG pipelines.
+      <div class="col-md-4">
+        <div class="feature-card glass-panel h-100 gs-feature-card text-center text-md-start">
+          <div class="icon-box icon-box-info mb-4 d-inline-flex align-items-center justify-content-center rounded-circle">
+            <i class="bi bi-shield-lock-fill fs-3 text-info"></i>
+          </div>
+          <h4 class="fw-bold mb-3 text-white">Zero Hallucinations</h4>
+          <p class="text-muted mb-0">
+            Answers are generated strictly from verified campus data using a secure, production-grade Retrieval-Augmented Generation pipeline.
           </p>
         </div>
       </div>
 
-      <div class="col-md-4 fade-up delay-2">
-        <div class="feature-card">
-          <i class="bi bi-diagram-3 feature-icon"></i>
-          <h5>Admin-Governed Knowledge</h5>
-          <p>
-            Admins control and curate entries while maintaining transparency and
-            avoiding duplication.
+      <div class="col-md-4">
+        <div class="feature-card glass-panel h-100 gs-feature-card text-center text-md-start">
+          <div class="icon-box icon-box-success mb-4 d-inline-flex align-items-center justify-content-center rounded-circle">
+            <i class="bi bi-person-badge-fill fs-3 text-success"></i>
+          </div>
+          <h4 class="fw-bold mb-3 text-white">Admin Governed</h4>
+          <p class="text-muted mb-0">
+            Admins meticulously control and curate entries. Built-in metadata validation prevents duplication and ensures high accuracy.
           </p>
         </div>
       </div>
@@ -168,63 +190,231 @@
   </div>
 </section>
 
-<!-- ===================== -->
-<!-- HOW IT WORKS -->
-<!-- ===================== -->
-<section id="how-it-works" class="section-padding bg-dark-soft">
+<!-- ARCHITECTURE SECTION -->
+<section id="architecture" class="section-padding bg-darker position-relative border-top border-dark border-opacity-50">
   <div class="container">
-    <div class="text-center mb-5 fade-up">
-      <h2 class="section-title">How CampusQuery Works</h2>
-      <p class="section-subtitle">
-        A clean, industry-aligned AI architecture.
-      </p>
-    </div>
-
-    <div class="row g-4">
-      <div class="col-md-3 fade-up">
-        <div class="step-card">
-          <span>1</span>
-          <p>Admins add verified campus entries</p>
-        </div>
+    <div class="row align-items-center">
+      <div class="col-lg-5 gs-arch-text text-center text-lg-start mb-5 mb-lg-0">
+        <h2 class="section-title text-gradient mb-3">Robust Architecture</h2>
+        <p class="text-muted fs-5 mb-5 max-w-lg mx-auto mx-lg-0">
+          A scalable, API-first microservices architecture running efficiently on the cloud. Built to handle thousands of concurrent queries.
+        </p>
+        <ul class="list-unstyled tech-list text-start d-inline-block mx-auto mx-lg-0">
+          <li class="mb-4 d-flex align-items-center tech-item">
+            <div class="tech-icon bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25 rounded me-3 d-flex align-items-center justify-content-center">
+              <i class="bi bi-server"></i>
+            </div>
+            <div>
+              <strong class="d-block text-white">Backend Core</strong>
+              <small class="text-muted">Python, Flask, LangChain, LangGraph</small>
+            </div>
+          </li>
+          <li class="mb-4 d-flex align-items-center tech-item">
+            <div class="tech-icon bg-warning bg-opacity-10 text-warning border border-warning border-opacity-25 rounded me-3 d-flex align-items-center justify-content-center">
+              <i class="bi bi-database"></i>
+            </div>
+            <div>
+              <strong class="d-block text-white">Data & Memory</strong>
+              <small class="text-muted">MySQL (Auth) & MongoDB (Chat History)</small>
+            </div>
+          </li>
+          <li class="mb-4 d-flex align-items-center tech-item">
+            <div class="tech-icon bg-success bg-opacity-10 text-success border border-success border-opacity-25 rounded me-3 d-flex align-items-center justify-content-center">
+              <i class="bi bi-hdd-network"></i>
+            </div>
+            <div>
+              <strong class="d-block text-white">Vector Storage</strong>
+              <small class="text-muted">ChromaDB (Local) & Qdrant (Cloud)</small>
+            </div>
+          </li>
+          <li class="d-flex align-items-center tech-item">
+            <div class="tech-icon bg-info bg-opacity-10 text-info border border-info border-opacity-25 rounded me-3 d-flex align-items-center justify-content-center">
+              <i class="bi bi-gem"></i>
+            </div>
+            <div>
+              <strong class="d-block text-white">Intelligence Engine</strong>
+              <small class="text-muted">Google Gemini LLM Platform</small>
+            </div>
+          </li>
+        </ul>
       </div>
-
-      <div class="col-md-3 fade-up delay-1">
-        <div class="step-card">
-          <span>2</span>
-          <p>Entries are chunked and embedded</p>
-        </div>
-      </div>
-
-      <div class="col-md-3 fade-up delay-2">
-        <div class="step-card">
-          <span>3</span>
-          <p>AI retrieves relevant context</p>
-        </div>
-      </div>
-
-      <div class="col-md-3 fade-up delay-3">
-        <div class="step-card">
-          <span>4</span>
-          <p>Students get accurate answers</p>
+      
+      <div class="col-lg-6 offset-lg-1 gs-arch-visual">
+        <div class="arch-diagram glass-panel p-4 p-md-5 rounded-4 position-relative border border-secondary border-opacity-25 w-100">
+          <div class="row g-3">
+            <div class="col-12 text-center flow-node">
+              <div class="bg-dark border border-secondary px-4 py-2 rounded-pill d-inline-flex align-items-center shadow-sm">
+                <i class="bi bi-browser-chrome fs-5 me-2 text-white"></i> <span class="fw-semibold text-white">Frontend (Vercel)</span>
+              </div>
+            </div>
+            <div class="col-12 text-center my-1 flow-arrow">
+              <i class="bi bi-arrow-down fs-4 text-info opacity-75"></i>
+            </div>
+            <div class="col-12 text-center flow-node">
+               <div class="bg-primary bg-opacity-10 border border-primary px-4 py-3 rounded-4 w-100 shadow-lg text-white">
+                <i class="bi bi-gear-fill fs-4 me-2"></i> <span class="fw-bold fs-5">Flask Backend API (Render)</span>
+              </div>
+            </div>
+            <div class="col-12 text-center my-1 flow-arrow">
+              <div class="d-flex justify-content-center gap-5">
+                <i class="bi bi-arrow-down-left fs-4 text-info opacity-75"></i>
+                <i class="bi bi-arrow-down fs-4 text-info opacity-75"></i>
+                <i class="bi bi-arrow-down-right fs-4 text-info opacity-75"></i>
+              </div>
+            </div>
+            <div class="col-4 text-center flow-node">
+              <div class="bg-dark border border-secondary p-3 rounded-4 d-flex flex-column align-items-center h-100">
+                <i class="bi bi-database mt-1 mb-2 text-warning fs-3"></i>
+                <span class="small fw-bold text-white mb-1">MySQL</span>
+                <span class="small text-muted d-none d-md-block" style="font-size: 0.75rem;">Users</span>
+              </div>
+            </div>
+            <div class="col-4 text-center flow-node">
+              <div class="bg-dark border border-secondary p-3 rounded-4 d-flex flex-column align-items-center h-100">
+                <i class="bi bi-hdd-stack mt-1 mb-2 text-success fs-3"></i>
+                <span class="small fw-bold text-white mb-1">MongoDB</span>
+                <span class="small text-muted d-none d-md-block" style="font-size: 0.75rem;">Chats</span>
+              </div>
+            </div>
+            <div class="col-4 text-center flow-node">
+              <div class="bg-dark border border-secondary p-3 rounded-4 d-flex flex-column align-items-center h-100">
+                <i class="bi bi-boxes mt-1 mb-2 text-info fs-3"></i>
+                <span class="small fw-bold text-white mb-1">Qdrant</span>
+                <span class="small text-muted d-none d-md-block" style="font-size: 0.75rem;">Vector DB</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===================== -->
+<!-- WORKFLOW SECTION -->
+<section id="workflow" class="section-padding position-relative border-top border-dark border-opacity-50">
+  <div class="container">
+    <div class="text-center mb-5 pb-4 gs-wf-header">
+      <h2 class="section-title text-gradient d-inline-block">The AI Pipeline</h2>
+      <p class="section-subtitle fs-5 mt-2">Follow a query from prompt to verified response.</p>
+    </div>
+
+    <!-- Scroll timeline container -->
+    <div class="workflow-container position-relative py-4 mx-auto" style="max-width: 900px;">
+      <!-- Center Line -->
+      <div class="timeline-line position-absolute top-0 bottom-0 start-50 translate-middle-x bg-secondary bg-opacity-25" style="width: 2px;"></div>
+      <div class="timeline-progress position-absolute top-0 start-50 translate-middle-x bg-info" style="width: 2px; height: 0%;"></div>
+
+      <!-- Step 1 -->
+      <div class="row align-items-center workflow-step gs-wf-step position-relative mb-5 pb-md-4">
+        <div class="col-5 text-end pe-4 pe-md-5">
+          <div class="step-card glass-panel w-100 d-inline-block text-start p-4 hover-lift border-0 shadow-lg ms-auto float-end">
+            <div class="d-flex align-items-center mb-2">
+              <i class="bi bi-chat-text-fill text-white bg-white bg-opacity-10 p-2 rounded me-3"></i>
+              <h4 class="fw-bold mb-0 text-white">User Query</h4>
+            </div>
+            <p class="text-muted mb-0 small">"When is the CS101 exam, and how do I register?"</p>
+          </div>
+        </div>
+        <div class="col-2 text-center position-relative d-flex justify-content-center align-items-center">
+          <div class="timeline-dot bg-dark border border-2 border-white rounded-circle position-relative z-2" style="width: 24px; height: 24px;"></div>
+        </div>
+        <div class="col-5"></div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="row align-items-center workflow-step gs-wf-step position-relative mb-5 pb-md-4">
+        <div class="col-5"></div>
+        <div class="col-2 text-center position-relative d-flex justify-content-center align-items-center">
+          <div class="timeline-dot bg-dark border border-2 border-primary rounded-circle position-relative z-2" style="width: 24px; height: 24px;"></div>
+        </div>
+        <div class="col-5 text-start ps-4 ps-md-5">
+          <div class="step-card glass-panel w-100 d-inline-block p-4 hover-lift border-0 shadow-lg border-start border-primary border-4">
+            <div class="d-flex align-items-center mb-2">
+              <i class="bi bi-cpu-fill text-primary bg-primary bg-opacity-10 p-2 rounded me-3"></i>
+              <h4 class="fw-bold mb-0 text-white">Agent Node</h4>
+            </div>
+            <p class="text-muted mb-0 small">Analyzes user intent, verifies campus scope, and rewrites the query using chat memory.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="row align-items-center workflow-step gs-wf-step position-relative mb-5 pb-md-4">
+        <div class="col-5 text-end pe-4 pe-md-5">
+          <div class="step-card glass-panel w-100 d-inline-block text-start p-4 hover-lift border-0 shadow-lg ms-auto float-end border-end border-info border-4">
+             <div class="d-flex align-items-center mb-2">
+              <i class="bi bi-search text-info bg-info bg-opacity-10 p-2 rounded me-3"></i>
+              <h4 class="fw-bold mb-0 text-white">Retriever</h4>
+            </div>
+             <p class="text-muted mb-0 small">Generates context embeddings via Gemini and retrieves highly relevant chunks from Qdrant data store.</p>
+          </div>
+        </div>
+        <div class="col-2 text-center position-relative d-flex justify-content-center align-items-center">
+          <div class="timeline-dot bg-dark border border-2 border-info rounded-circle position-relative z-2" style="width: 24px; height: 24px;"></div>
+        </div>
+        <div class="col-5"></div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="row align-items-center workflow-step gs-wf-step position-relative">
+        <div class="col-5"></div>
+        <div class="col-2 text-center position-relative d-flex justify-content-center align-items-center">
+          <div class="timeline-dot bg-success border border-2 border-success rounded-circle position-relative z-2 shadow" style="width: 24px; height: 24px; box-shadow: 0 0 15px var(--bs-success) !important;"></div>
+        </div>
+        <div class="col-5 text-start ps-4 ps-md-5">
+           <div class="step-card bg-success bg-opacity-10 border border-success border-opacity-25 w-100 d-inline-block p-4 hover-lift shadow-lg rounded-4">
+              <div class="d-flex align-items-center mb-2">
+                <i class="bi bi-lightbulb-fill text-success fs-4 me-3"></i>
+                <h4 class="fw-bold mb-0 text-success">Answer Node</h4>
+              </div>
+              <p class="text-white-50 mb-0 small">LLM synthesizes retrieved context and applies strict guardrails to return an academic, hallucination-free response.</p>
+           </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="section-padding position-relative border-top border-dark border-opacity-50 overflow-hidden">
+  <div class="container gs-cta-section text-center position-relative z-1 py-5">
+    <div class="glass-panel p-5 rounded-4 d-inline-block border border-info border-opacity-25 shadow-lg w-100 max-w-lg mx-auto" style="background: linear-gradient(135deg, rgba(18,24,43,0.9), rgba(11,15,25,0.95)); max-width: 800px;">
+      <h2 class="display-6 fw-bold mb-3">Ready to Upgrade Your Campus?</h2>
+      <p class="text-muted fs-5 mb-5 px-md-5">Join administrators and students who rely on verified intelligence for their daily academic workflows.</p>
+      <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <a href="pages/register.html" class="btn btn-info px-5 py-3 rounded-pill fw-bold shadow-sm hover-lift">Get Started Free</a>
+        <a href="pages/login.html" class="btn btn-outline-light px-5 py-3 rounded-pill fw-bold hover-lift glass-btn">Sign In</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
-<!-- ===================== -->
-<footer class="footer text-center">
-  <div class="container">
-    <p class="mb-1">
-      © 2026 CampusQuery — Built for Academic Institutions
-    </p>
-    <small class="text-muted">
-      Designed & Developed by Shubhranshu Sahu
-    </small>
+<footer class="footer position-relative z-1 border-top border-secondary border-opacity-25 bg-darker">
+  <div class="container py-5">
+    <div class="row g-4 align-items-center">
+      <div class="col-md-6 text-center text-md-start">
+        <a class="navbar-brand fw-bold text-white fs-4 d-inline-flex align-items-center mb-2" href="#">
+          <i class="bi bi-cpu text-info fs-3 me-2"></i> CampusQuery AI
+        </a>
+        <p class="text-muted small mb-0">Built for forward-thinking academic institutions.</p>
+      </div>
+      <div class="col-md-6 text-center text-md-end">
+         <p class="mb-1 text-muted small">
+          © 2026 CampusQuery. All rights reserved.
+        </p>
+        <div class="text-secondary small mt-2">
+          Designed & Developed by <span class="text-white">Shubhranshu Sahu</span>
+        </div>
+      </div>
+    </div>
   </div>
 </footer>
+
+<!-- GSAP and ScrollTrigger -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
