@@ -1,120 +1,153 @@
+/* chat layout specific tweaks on top of theme.css */
 
-#chat-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+/* Hide default scrollbars for modern look */
+.thread-list::-webkit-scrollbar,
+.chat-messages::-webkit-scrollbar {
+  width: 6px;
 }
-
-
-.chat-layout {
-  display: flex;
-  height: 100vh;
-  background: var(--bg-main);
-    overflow: hidden;
-
+.thread-list::-webkit-scrollbar-track,
+.chat-messages::-webkit-scrollbar-track {
+  background: transparent;
 }
-
-/* Sidebar */
-.chat-sidebar {
-  width: 260px;
-  background: var(--bg-card);
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
+.thread-list::-webkit-scrollbar-thumb,
+.chat-messages::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
 }
-
-.thread-list {
-  margin-top: 15px;
-  overflow-y: auto;
-  flex: 1;
+.thread-list::-webkit-scrollbar-thumb:hover,
+.chat-messages::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .thread-item {
-  padding: 10px;
-  border-radius: 8px;
+  padding: 12px 16px;
+  border-radius: 12px;
   cursor: pointer;
-  margin-bottom: 5px;
-  color: var(--text-main);
+  margin-bottom: 6px;
+  color: var(--text-muted);
+  font-weight: 500;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-left: 3px solid transparent;
 }
 
-.thread-item:hover,
+.thread-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+}
+
 .thread-item.active {
-  background: #1f2937;
+  background: rgba(34, 211, 238, 0.1);
+  color: var(--accent);
+  border-left: 3px solid var(--accent);
 }
 
 /* Chat Panel */
-.chat-main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;   /* full viewport */
-  overflow: hidden; /* prevent full page scroll */
-  padding: 20px;
-}
-
-
-.chat-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .chat-messages {
-  flex: 1;                /* takes remaining space */
-  overflow-y: auto;       /* only this scrolls */
-  padding: 15px 0;
   display: flex;
   flex-direction: column;
 }
-
 
 .message {
-  margin-bottom: 15px;
-  max-width: 75%;
-  padding: 10px 15px;
-  border-radius: 12px;
+  margin-bottom: 24px;
+  margin-top: 5px;
+  max-width: 85%;
+  padding: 18px 24px;
+  border-radius: 20px;
+  line-height: 1.6;
+  font-size: 1.05rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  position: relative;
+  word-wrap: break-word;
+}
+
+.message p:last-child {
+  margin-bottom: 0;
 }
 
 .message.user {
-  background: var(--accent);
-  color: #000;
+  background: linear-gradient(135deg, var(--accent), #155e75);
+  color: #fff;
   align-self: flex-end;
+  border-bottom-right-radius: 4px; /* classic chat tail */
+}
+
+/* markdown inside user uses white text */
+.message.user h1, .message.user h2, .message.user h3, .message.user strong {
+    color: #fff !important;
 }
 
 .message.assistant {
-  background: var(--bg-card);
+  background: rgba(30, 41, 59, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
 }
 
-.chat-input-container {
-  padding-top: 10px;
+.message.assistant strong {
+  color: white;
 }
 
-.typing-indicator {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-}
-
-
-.welcome-screen {
-  margin: auto;
-  text-align: center;
-  color: var(--text-muted);
-}
-
-
-/* Chat styling Markdowns ? */
+/* Markdown typography inside assistant */
 .message h1, 
 .message h2, 
 .message h3 {
-  font-size: 1rem;
-  margin-top: 10px;
+  font-size: 1.25rem;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  color: white;
+  font-weight: 700;
 }
 
-.message ul {
+.message ul, .message ol {
   padding-left: 20px;
+  margin-bottom: 10px;
 }
 
-.message strong {
-  font-weight: 600;
+.message li {
+  margin-bottom: 5px;
+}
+
+.message pre {
+  background: #0f172a;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+  overflow-x: auto;
+}
+
+.message code {
+  font-family: monospace;
+  background: rgba(0,0,0,0.3);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #fbbf24;
+}
+
+/* Flashing cursor for typewriter effect */
+.typewriter-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 18px;
+  background-color: var(--accent);
+  vertical-align: middle;
+  margin-left: 4px;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@media (max-width: 768px) {
+  .message {
+    max-width: 95%;
+    padding: 14px 18px;
+    font-size: 1rem;
+  }
 }

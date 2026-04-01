@@ -1,27 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login | CampusQuery</title>
 
   <!-- Bootstrap -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 
   <!-- Icons -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
-    rel="stylesheet"
-  />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
 
   <!-- Font -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="../css/theme.css" />
@@ -30,116 +22,116 @@
 
 <body class="auth-page position-relative overflow-hidden min-vh-100">
 
-<!-- Abstract Background Objects -->
-<div class="glow-orb orb-1 opacity-25"></div>
-<div class="glow-orb orb-2 opacity-25"></div>
-<div class="glow-orb orb-3 opacity-25"></div>
+  <!-- Abstract Background Objects -->
+  <div class="glow-orb orb-1 opacity-25"></div>
+  <div class="glow-orb orb-2 opacity-25"></div>
+  <div class="glow-orb orb-3 opacity-25"></div>
 
-<!-- GLOBAL LOADER -->
-<div id="global-loader" class="loader-overlay d-none">
-  <div class="loader-content text-center glass-panel p-4 rounded-4 shadow-lg border-info border-opacity-25">
-    <div class="spinner-border text-info mb-3" style="width: 3rem; height: 3rem;" role="status"></div>
-    <p id="loader-text" class="fw-semibold text-white mb-0">Signing you in...</p>
-  </div>
-</div>
-
-<!-- LOGIN CONTAINER -->
-<div class="container min-vh-100 d-flex align-items-center justify-content-center position-relative z-1">
-  <div class="auth-card glass-panel w-100 p-4 p-md-5 rounded-4 border border-secondary border-opacity-25 shadow-lg gs-auth-card" style="max-width: 450px;">
-
-    <!-- Logo -->
-    <div class="text-center mb-4 gs-auth-item">
-      <a href="../index.html" class="text-decoration-none d-inline-block hover-lift">
-        <h3 class="fw-bold text-white mb-1">
-          <i class="bi bi-cpu text-info"></i> CampusQuery
-        </h3>
-      </a>
-      <p class="text-muted mt-2">Welcome back to the portal</p>
+  <!-- GLOBAL LOADER -->
+  <div id="global-loader" class="loader-overlay d-none">
+    <div class="loader-content text-center glass-panel p-4 rounded-4 shadow-lg border-info border-opacity-25">
+      <div class="spinner-border text-info mb-3" style="width: 3rem; height: 3rem;" role="status"></div>
+      <p id="loader-text" class="fw-semibold text-white mb-0">Signing you in...</p>
     </div>
+  </div>
 
-    <!-- Error Message -->
-    <div id="error-box" class="alert alert-danger d-none border-danger border-opacity-50 bg-danger bg-opacity-10 text-white shadow-sm gs-auth-item"></div>
+  <!-- LOGIN CONTAINER -->
+  <div class="container min-vh-100 d-flex flex-column justify-content-center align-items-center position-relative z-1 py-5">
+    <div
+      class="auth-card glass-panel w-100 p-4 p-md-5 my-auto rounded-4 border border-secondary border-opacity-25 shadow-lg gs-auth-card"
+      style="max-width: 450px;">
 
-    <!-- Login Form -->
-    <form id="login-form">
-      <div class="mb-4 gs-auth-item">
-        <label class="form-label text-white-50 small fw-bold text-uppercase mb-2" style="letter-spacing: 0.05em;">Institutional Email</label>
-        <div class="input-group">
-          <span class="input-group-text bg-dark border-secondary border-opacity-50 text-muted"><i class="bi bi-envelope"></i></span>
-          <input
-            type="email"
-            class="form-control bg-dark border-secondary border-opacity-50 text-white py-2"
-            id="email"
-            placeholder="you@college.edu"
-            required
-          />
-        </div>
-      </div>
-
-      <div class="mb-5 gs-auth-item">
-        <label class="form-label text-white-50 small fw-bold text-uppercase mb-2" style="letter-spacing: 0.05em;">Password</label>
-        <div class="input-group">
-          <span class="input-group-text bg-dark border-secondary border-opacity-50 text-muted"><i class="bi bi-lock"></i></span>
-          <input
-            type="password"
-            class="form-control bg-dark border-secondary border-opacity-50 text-white py-2"
-            id="password"
-            placeholder="••••••••"
-            required
-          />
-        </div>
-      </div>
-
-      <div class="gs-auth-item">
-        <button type="submit" class="btn btn-info w-100 py-3 fw-bold rounded-pill shadow-sm hover-lift text-dark">
-          Access Dashboard <i class="bi bi-arrow-right-short fs-5 align-middle mb-1 ms-1"></i>
-        </button>
-      </div>
-    </form>
-
-    <!-- Footer -->
-    <div class="text-center mt-4 pt-3 border-top border-secondary border-opacity-25 gs-auth-item">
-      <small class="text-muted">
-        Don’t have an account?
-        <a href="register.html" class="text-info text-decoration-none fw-semibold hover-white" style="transition: color 0.2s;">
-          Request Access
+      <!-- Logo -->
+      <div class="text-center mb-4 gs-auth-item">
+        <a href="../index.html" class="text-decoration-none d-inline-block hover-lift">
+          <h3 class="fw-bold text-white mb-1">
+            <i class="bi bi-cpu text-info"></i> CampusQuery
+          </h3>
         </a>
-      </small>
+        <p class="text-muted mt-2">Welcome back to the portal</p>
+      </div>
+
+      <!-- Error Message -->
+      <div id="error-box"
+        class="alert alert-danger d-none border-danger border-opacity-50 bg-danger bg-opacity-10 text-white shadow-sm gs-auth-item">
+      </div>
+
+      <!-- Login Form -->
+      <form id="login-form">
+        <div class="mb-4 gs-auth-item">
+          <label class="form-label text-white-50 small fw-bold text-uppercase mb-2"
+            style="letter-spacing: 0.05em;">Institutional Email</label>
+          <div class="input-group">
+            <span class="input-group-text bg-dark border-secondary border-opacity-50 text-muted"><i
+                class="bi bi-envelope"></i></span>
+            <input type="email" class="form-control bg-dark border-secondary border-opacity-50 text-white py-2"
+              id="email" placeholder="you@college.edu" required />
+          </div>
+        </div>
+
+        <div class="mb-5 gs-auth-item">
+          <label class="form-label text-white-50 small fw-bold text-uppercase mb-2"
+            style="letter-spacing: 0.05em;">Password</label>
+          <div class="input-group">
+            <span class="input-group-text bg-dark border-secondary border-opacity-50 text-muted"><i
+                class="bi bi-lock"></i></span>
+            <input type="password" class="form-control bg-dark border-secondary border-opacity-50 text-white py-2"
+              id="password" placeholder="••••••••" required />
+          </div>
+        </div>
+
+        <div class="gs-auth-item">
+          <button type="submit" class="btn btn-info w-100 py-3 fw-bold rounded-pill shadow-sm hover-lift text-dark">
+            Access Dashboard <i class="bi bi-arrow-right-short fs-5 align-middle mb-1 ms-1"></i>
+          </button>
+        </div>
+      </form>
+
+      <!-- Footer -->
+      <div class="text-center mt-4 pt-3 border-top border-secondary border-opacity-25 gs-auth-item">
+        <small class="text-muted">
+          Don’t have an account?
+          <a href="register.html" class="text-info text-decoration-none fw-semibold hover-white"
+            style="transition: color 0.2s;">
+            Request Access
+          </a>
+        </small>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- GSAP -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Login Logic -->
-<script src="../js/config.js"></script>
-<script src="../js/pages/login.js"></script>
+  <!-- Login Logic -->
+  <script src="../js/config.js"></script>
+  <script src="../js/pages/login.js"></script>
 
-<!-- Inline Intro Animations -->
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    if (typeof gsap === 'undefined') return;
-    
-    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-    
-    tl.from(".gs-auth-card", {
-      y: 40,
-      scale: 0.95,
-      opacity: 0,
-      duration: 1
-    })
-    .from(".gs-auth-item", {
-      y: 20,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.1
-    }, "-=0.6");
-  });
-</script>
+  <!-- Inline Intro Animations -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (typeof gsap === 'undefined') return;
+
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+      tl.from(".gs-auth-card", {
+        y: 40,
+        scale: 0.95,
+        opacity: 0,
+        duration: 1
+      })
+        .from(".gs-auth-item", {
+          y: 20,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.1
+        }, "-=0.6");
+    });
+  </script>
 
 </body>
+
 </html>
