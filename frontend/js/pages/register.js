@@ -32,6 +32,7 @@ form.addEventListener("submit", async (e) => {
     return;
   }
 
+let isNavigating = false;
 try {
   showLoader("Creating your account...");
 
@@ -57,12 +58,13 @@ try {
     throw new Error(result.error || "Registration failed");
   }
 
+  isNavigating = true;
   window.location.href = "login.html";
 
 } catch (err) {
   showError(err.message);
 }finally {
-    hideLoader();
+    if (!isNavigating) hideLoader();
   }
 
 });
