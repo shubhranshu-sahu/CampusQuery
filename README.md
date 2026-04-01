@@ -61,104 +61,310 @@ This is not just a chatbot — it is **campus knowledge infrastructure**.
 
 ---
 
-## 🏗️ System Architecture (High-Level)
+## 🏗️ Tech Stack
 
-```
-Frontend (HTML / CSS / JS / Bootstrap)
-        ↓ (REST APIs)
-Flask Backend (API-only, no templating)
-        ↓
-RAG Pipeline (LangChain + LangGraph)
-        ↓
-Vector Store (ChromaDB)
-        ↓
-LLM Inference (Campus-scoped)
-```
+### Backend
 
-Supporting Databases:
-
-* **MySQL** → Users, roles, entries metadata
-* **MongoDB** → Chat threads, messages, summaries
-
----
-
-## 🔐 Authentication & Security
-
-* Custom authentication (no Firebase / paid services)
-* Role-based authorization (Student / Admin)
-* Token-based API protection
-* No secrets exposed to frontend
-* Clear separation of concerns
-
----
-
-## 🧩 AI Chat Design (Important)
-
-Each chat thread is treated as a **stateful AI session**:
-
-* Short-term memory (recent messages)
-* Summarized memory for long conversations
-* Context rewritten before retrieval
-* RAG used as the single source of truth
-
-The AI:
-
-* ✅ Answers campus-related and academic questions
-* ✅ Helps with writing applications and emails
-* ❌ Refuses general internet knowledge
-* ❌ Never guesses or hallucinates
-
-This mirrors how real-world enterprise AI assistants are built.
-
----
-
-## 🛠️ Tech Stack
+* Python (Flask)
+* LangChain + LangGraph
+* Google Gemini (LLM)
+* SQLAlchemy (MySQL)
+* MongoDB (Chat history)
+* ChromaDB (local vector DB)
+* Qdrant (cloud vector DB)
 
 ### Frontend
 
 * HTML, CSS, JavaScript
-* Bootstrap
-* Fetch API (SPA-style, no reloads)
+* Bootstrap 5
+
+---
+
+## 🧠 Architecture Overview
+
+```text
+Frontend (Vercel)
+        ↓
+Flask Backend (Render)
+        ↓
+-----------------------------
+MySQL → Users
+MongoDB → Chat + Entries
+Vector DB → RAG (Chroma/Qdrant)
+```
+
+---
+
+## 📂 Project Structure
 
 ### Backend
 
-* Python
-* Flask (API-only)
-* LangChain
-* LangGraph
-* LangSmith
-* MCP
-
-### Data & AI
-
-* MySQL (relational data)
-* MongoDB (chat state & memory)
-* ChromaDB (vector store)
-* Production-grade RAG pipeline
+```text
+backend/
+│   run.py
+│   requirements.txt
+│   .env
+│
+└───app/
+    │   config.py
+    │   extensions.py
+    │   __init__.py
+    │
+    ├───ai/
+    │   │   graph.py
+    │   │   model.py
+    │   │   nodes.py
+    │   │   prompts.py
+    │   │   schemas.py
+    │   │   state.py
+    │   │   vector_store.py
+    │
+    ├───models/
+    │   │   base.py
+    │   │   entry.py
+    │   │   user.py
+    │
+    ├───routes/
+    │   │   auth_routes.py
+    │   │   chat_routes.py
+    │   │   entry_routes.py
+    │   │   user_routes.py
+    │
+    ├───services/
+    │   │   auth_service.py
+    │   │   chat_service.py
+    │   │   embedding_service.py
+    │   │   entry_service.py
+    │   │   memory_service.py
+    │   │   retrieval_service.py
+    │
+    └───utils/
+        │   decorators.py
+        │   jwt_utils.py
+```
 
 ---
 
-## 📌 Current Status
+### Frontend
 
-* Core system architecture finalized
-* Feature scope locked
-* RAG-first AI design planned
-* Ready for step-by-step implementation
+```text
+frontend/
+│   index.html
+│
+├───css/
+│       animations.css
+│       chat.css
+│       theme.css
+│
+├───js/
+│   │   config.js
+│   │   index.js
+│   │
+│   └───pages/
+│           chat.js
+│           dashboard.js
+│           entries.js
+│           login.js
+│           register.js
+│
+├───pages/
+│       chat.html
+│       dashboard.html
+│       entries.html
+│       login.html
+│       profile.html
+│       register.html
+│
+└───public/
+    └───assets/
+```
 
 ---
 
-## 🧭 Future Enhancements
+## ⚙️ Environment Variables
 
-* Entry approval workflows
-* Admin collaboration & shared ownership
-* Analytics dashboard
-* Advanced tagging & filters
-* Fine-grained AI permissions
+Create a `.env` file in `/backend`
+
+```env
+# Flask
+SECRET_KEY=your_secret_key
+ENV=development
+
+# MySQL
+MYSQL_URL=your_mysql_connection_string
+
+# MongoDB
+MONGO_URL=your_mongodb_connection_string
+MONGO_DB_NAME=campusquery
+
+# Gemini API
+GOOGLE_API_KEY=your_gemini_api_key
+
+# Vector DB
+VECTOR_DB=chroma   # or qdrant
+
+# Qdrant
+QDRANT_URL=your_qdrant_url
+QDRANT_API_KEY=your_qdrant_api_key
+QDRANT_COLLECTION=entries_collection
+```
+
+---
+
+## 🗄️ Databases Used
+
+### 1. MySQL
+
+* Stores users
+* Managed via SQLAlchemy
+
+### 2. MongoDB
+
+* Chat threads
+* Chat messages
+* Entries (knowledge base)
+
+### 3. Vector Database
+
+#### Local (Development)
+
+* ChromaDB
+
+#### Production
+
+* Qdrant
+
+---
+
+## 🚀 Setup Instructions
+
+### 1. Clone Repository
+
+```bash
+git clone <repo_url>
+cd CampusQuery
+```
+
+---
+
+### 2. Backend Setup
+
+```bash
+cd backend
+python -m venv venv
+venv\Scripts\activate   # Windows
+pip install -r requirements.txt
+```
+
+---
+
+### 3. Configure Environment
+
+Create `.env` file using `.env.example`
+
+---
+
+### 4. Run Backend
+
+```bash
+python run.py
+```
+
+Server will start at:
+
+```text
+http://127.0.0.1:5000
+```
+
+---
+
+### 5. Frontend Setup
+
+Just open:
+
+```text
+frontend/index.html
+```
+
+Or use Live Server (recommended)
+
+---
+
+## 🧠 AI System Flow
+
+```text
+User Query
+   ↓
+Agent Node (intent + rewrite)
+   ↓
+Retriever (Vector DB)
+   ↓
+Answer Node (LLM + Context)
+```
+
+---
+
+## 📦 RAG Implementation
+
+* Chunking using RecursiveCharacterTextSplitter
+* Embeddings via Gemini
+* Vector storage (Chroma/Qdrant)
+* Metadata filtering supported
+
+---
+
+## 🌐 Deployment
+
+### Frontend
+
+* Vercel
+
+### Backend
+
+* Render
+
+### Databases
+
+* MongoDB Atlas
+* Aiven MySQL
+* Qdrant Cloud
+
+---
+
+## ⚠️ Common Issues
+
+### CORS Error
+
+Ensure Flask CORS is enabled:
+
+```python
+CORS(app)
+```
+
+---
+
+### Vector DB Issues
+
+* Use UUID for Qdrant IDs
+* Recreate embeddings when switching DB
+
+---
+
+### API Not Working
+
+* Check API_BASE in frontend
+* Ensure backend is running
+
+
 
 ---
 
 ## 👨‍💻 Author
 
-Built by **Shubhranshu Sahu**
+Shubhranshu Sahu
 
-CampusQuery is designed as a serious, industry-aligned major project with real deployment potential for academic institutions.
+---
+
+## 📜 License
+
+MIT License
